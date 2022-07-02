@@ -1,6 +1,6 @@
 import fs from 'fs';
 import ffmpeg from 'ffmpeg';
-import Jimp from 'jimp/*';
+import Jimp from 'jimp';
 export const compositeYan = async (imgSrc: string, yanSrc: string) => {
   const image = await Jimp.read(imgSrc);
   const yan = await Jimp.read(yanSrc);
