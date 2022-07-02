@@ -1,5 +1,5 @@
 import sharp from 'sharp'
-
+import fs from 'fs';
 export const compositeYan = async (imgSrc: string, yanSrc: string): Promise<sharp.OutputInfo> =>
   {
     const fileExtension = imgSrc.split('.').pop();
@@ -23,5 +23,15 @@ export const compositeYan = async (imgSrc: string, yanSrc: string): Promise<shar
         img.gif();
         break;
     }
-    return img.toFile(imgSrc);
+    const result = img.toFile(imgSrc+'.yan');
+    //Delete old file and rename new file
+    fs.unlink(imgSrc, (err) => {
+      if (err) throw err;
+      fs.rename(imgSrc+'.yan', imgSrc, (err) => {
+        if (err) throw err;
+      }
+      )
+    }
+    )
+    return result;
   }
