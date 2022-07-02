@@ -1184,6 +1184,19 @@ array-union@^2.1.0:
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"
   integrity sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
 
+async@>=0.2.9:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.4.tgz#2d22e00f8cddeb5fde5dd33522b56d1cf569a81c"
+  integrity sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==
+
+audioconcat@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/audioconcat/-/audioconcat-0.1.4.tgz#e7f7321bf366ef4dc7d4a2194e9a2aa0585388f4"
+  integrity sha512-RH7f6n1kfQTathHadWJp8b/hz7y9GYdhKDtkqany8qYxkv0RQamY+7dFBbJOxLh86ouMTYmKYenSdkxSbubmOA==
+  dependencies:
+    fluent-ffmpeg "^2.0.0"
+    lodash.merge "^4.6.2"
+
 babel-jest@^28.1.1:
   version "28.1.1"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-28.1.1.tgz#2a3a4ae50964695b2d694ccffe4bec537c5a3586"
@@ -1791,6 +1804,14 @@ flatted@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.1.1.tgz#c4b489e80096d9df1dfc97c79871aea7c617c469"
   integrity sha512-zAoAQiudy+r5SvnSw3KJy5os/oRJYHzrzja/tBDqrZtNhUw8bt6y8OBzMWcjWr+8liV8Eb6yOhw8WZ7VFZ5ZzA==
+
+fluent-ffmpeg@^2.0.0:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/fluent-ffmpeg/-/fluent-ffmpeg-2.1.2.tgz#c952de2240f812ebda0aa8006d7776ee2acf7d74"
+  integrity sha512-IZTB4kq5GK0DPp7sGQ0q/BWurGHffRtQQwVkiqDgeO6wYJLLV5ZhgNOQ65loZxxuPMKZKZcICCUnaGtlxBiR0Q==
+  dependencies:
+    async ">=0.2.9"
+    which "^1.1.1"
 
 fs.realpath@^1.0.0:
   version "1.0.0"
@@ -3213,6 +3234,13 @@ walker@^1.0.8:
   integrity sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==
   dependencies:
     makeerror "1.0.12"
+
+which@^1.1.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/which/-/which-1.3.1.tgz#a45043d54f5805316da8d62f9f50918d3da70b0a"
+  integrity sha512-HxJdYWq1MTIQbJ3nw0cqssHoTNU267KlrDuGZ1WYlxDStUtKUhOaJmh112/TZmHxxUfuJqPXSOm7tDyas0OSIQ==
+  dependencies:
+    isexe "^2.0.0"
 
 which@^2.0.1:
   version "2.0.2"
