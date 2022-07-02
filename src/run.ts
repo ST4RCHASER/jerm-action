@@ -17,13 +17,13 @@ export const run = async (input: Inputs): Promise<void> => {
       includeEmpty: false,
       ignoreFiles: ['.gitignore', '.prettierignore'],
     })
-    let filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.github/') === -1)
-    let lists = filteredFiles.map((i) => path.join(filePath, i));
-    let promises = Promise.all(lists.map(async (i) => {
+    const filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.github/') === -1)
+    const lists = filteredFiles.map((i) => path.join(filePath, i));
+    const promises = Promise.all(lists.map(async (i) => {
       //Check if file size not zero and less than 5MB
       const stats = await fs.stat(i);
       if (stats.size > 0 && stats.size < 5242880) {
-        let fileExtension = path.extname(i);
+        const fileExtension = path.extname(i);
         switch (fileExtension) {
           case '.jpg':
           case '.png':

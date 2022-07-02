@@ -2,8 +2,8 @@ import sharp from 'sharp'
 
 export const compositeYan = async (imgSrc: string, yanSrc: string): Promise<sharp.OutputInfo> =>
   {
-    let fileExtension = imgSrc.split('.').pop();
-    let img = sharp(imgSrc)
+    const fileExtension = imgSrc.split('.').pop();
+    const img = sharp(imgSrc)
     .resize(1024)
     .composite([
       {
