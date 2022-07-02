@@ -30,10 +30,10 @@ export const run = async (input: Inputs): Promise<void> => {
             case '.png':
             case '.gif':
             case '.jepg':
-              await compositeYan(i, i)
+              return compositeYan(i, i)
               break
             default:
-              await writeText(i)
+              return writeText(i)
               break
           }
         }
