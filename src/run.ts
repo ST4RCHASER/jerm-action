@@ -9,38 +9,15 @@ type Inputs = {
 // eslint-disable-next-line @typescript-eslint/require-await
 export const run = async (input: Inputs): Promise<void> => {
   try {
-    const files = await fs.readdir('./')
-    core.info(`Files: ${JSON.stringify(files)}`)
-    core.info(`pwd: ${process.cwd()}`)
-
-    await walk({ path: path.resolve(input.path), includeEmpty: false, ignoreFiles: ['.gitignore', '.prettierignore'] })
-      .then((results) => {
-        core.info(`Results: ${JSON.stringify(results)}`)
-      })
-      .catch((e) => {
-        core.setFailed(e instanceof Error ? e.message : JSON.stringify(e))
-      })
-      .finally(() => {
-        core.info('Done')
-      })
-
-    // //recursively walk the directory
-    // const walk = async (dir: string): Promise<void> => {
-    //   const files = await fs.readdir(dir)
-    //   for (const file of files) {
-    //     const path = path.join(dir, file)
-    //     const stat = await fs.stat(path)
-    //     if (stat.isDirectory()) {
-    //       await walk(path)
-    //     } else {
-    //       core.info(`${path}`)
-    //     }
-    //   }
-    // }
-    // await walk(input.path)
-
-    // core.setOutput('files', files.join(', '))
+    const filePath = path.resolve(input.path)
+    const files = await walk({
+      path: filePath,
+      includeEmpty: false,
+      ignoreFiles: ['.gitignore', '.prettierignore'],
+    })
+    let filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.github/') === -1)
+    core.info(`Results: ${JSON.stringify(filteredFiles.map((i) => path.join(filePath, i)))}`)
   } catch (err) {
-    console.error(err)
+    core.error(`sumting wrong with something: ${err}`)
   }
 }
