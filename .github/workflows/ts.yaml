@@ -1,5 +1,4 @@
 name: ts
-
 on:
   push:
     branches: [main]
@@ -29,7 +28,7 @@ jobs:
           cache: yarn
       - run: yarn
       # - run: yarn lint
-      # - run: yarn test
+      - run: yarn test
       - run: yarn build
       - run: yarn package
 
