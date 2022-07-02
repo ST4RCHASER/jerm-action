@@ -1,5 +1,4 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
 import { promises as fs } from 'fs'
 
 async function run(): Promise<void> {
