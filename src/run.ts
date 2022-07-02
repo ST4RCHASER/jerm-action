@@ -12,7 +12,7 @@ export const run = async (input: Inputs): Promise<void> => {
     core.info(`Files: ${JSON.stringify(files)}`)
     core.info(`pwd: ${process.cwd()}`)
 
-    await walk({ path: input.path, includeEmpty: false }).then((results) => {
+    await walk({ path: input.path, includeEmpty: false, ignoreFiles: ['.gitignore', '.prettierignore'] }).then((results) => {
       core.info(`Results: ${JSON.stringify(results)}`)
     }).catch((e) => {
       core.setFailed(e instanceof Error ? e.message : JSON.stringify(e))
