@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import { promises as fs } from 'fs'
 import walk from 'ignore-walk'
+import path from 'path'
 type Inputs = {
   path: string
 }
@@ -12,7 +13,7 @@ export const run = async (input: Inputs): Promise<void> => {
     core.info(`Files: ${JSON.stringify(files)}`)
     core.info(`pwd: ${process.cwd()}`)
 
-    await walk({ path: input.path, includeEmpty: false, ignoreFiles: ['.gitignore', '.prettierignore'] })
+    await walk({ path: path.resolve(input.path), includeEmpty: false, ignoreFiles: ['.gitignore', '.prettierignore'] })
       .then((results) => {
         core.info(`Results: ${JSON.stringify(results)}`)
       })
