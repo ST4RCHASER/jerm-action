@@ -33,9 +33,6 @@ jobs:
       - run: yarn build
       - run: yarn package
 
-      - name: e2e-test
-        uses: ./
-
   generate:
     runs-on: ubuntu-latest
     steps:
