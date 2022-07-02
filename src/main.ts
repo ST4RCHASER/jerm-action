@@ -1,16 +1,13 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import { wait } from './wait'
+import { promises as fs } from 'fs'
 
 async function run(): Promise<void> {
   try {
-    const ms: number = 3000;
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    fs.readdir('./').then(files => {
+      core.setOutput('files', files.join('\n'))
+    })
 
-    core.debug(new Date().toTimeString())
-    await wait(ms)
-    core.debug(new Date().toTimeString())
-
-    core.setOutput('time', new Date().toTimeString())
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
