@@ -1,6 +1,0 @@
-name: 'Jerm'
-description: 'Get blessing in every file possible'
-author: 'Yue'
-runs:
-  using: 'node16'
-  main: 'dist/index.js'
