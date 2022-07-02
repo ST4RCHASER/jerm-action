@@ -17,5 +17,15 @@ runs:
     - name: 'Start Modify...'
       run: node $GITHUB_ACTION_PATH/dist/index.js
       shell: bash
+    - name: 'Commit Changes...'
+      uses: EndBug/add-and-commit@v9
+      with:
+        message: 'feat(blessing): blessed'
+        committer_name: GitHub Actions
+        committer_email: actions@github.com
     - name: 'Create Pull Reqests...'
       uses: peter-evans/create-pull-request@v4
+      with: 
+        branch-suffix: short-commit-hash
+        committer: GitHub <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
