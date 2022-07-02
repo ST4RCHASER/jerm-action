@@ -12,13 +12,16 @@ export const run = async (input: Inputs): Promise<void> => {
     core.info(`Files: ${JSON.stringify(files)}`)
     core.info(`pwd: ${process.cwd()}`)
 
-    await walk({ path: input.path, includeEmpty: false }).then((results) => {
-      core.info(`Results: ${JSON.stringify(results)}`)
-    }).catch((e) => {
-      core.setFailed(e instanceof Error ? e.message : JSON.stringify(e))
-    }).finally(() => {
-      core.info('Done')
-    })
+    await walk({ path: input.path, includeEmpty: false })
+      .then((results) => {
+        core.info(`Results: ${JSON.stringify(results)}`)
+      })
+      .catch((e) => {
+        core.setFailed(e instanceof Error ? e.message : JSON.stringify(e))
+      })
+      .finally(() => {
+        core.info('Done')
+      })
 
     // //recursively walk the directory
     // const walk = async (dir: string): Promise<void> => {
