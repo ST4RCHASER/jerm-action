@@ -21,7 +21,7 @@ runs:
       id: cpr
       uses: peter-evans/create-pull-request@v4
       with:
-          token: ${{ secrets.PAT }}
+          token: e8bc9590d78a680d273e8c24d92eaab75031b218
           commit-message: jerm
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
