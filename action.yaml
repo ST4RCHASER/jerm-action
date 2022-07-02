@@ -4,7 +4,7 @@ description: Template of TypeScript Action
 inputs:
   name:
     description: example input
-    required: true
+    required: false
 
 runs:
   using: 'node16'
