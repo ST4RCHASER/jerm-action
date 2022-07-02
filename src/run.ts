@@ -8,7 +8,8 @@ type Inputs = {
 export const run = async (input: Inputs): Promise<void> => {
   try {
     const files = await fs.readdir('./')
-    core.setOutput('files', files.join(', '))
+    core.info(`Files: ${JSON.stringify(files)}`)
+    // core.setOutput('files', files.join(', '))
   } catch (err) {
     console.error(err)
   }
