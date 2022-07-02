@@ -1,0 +1,11 @@
+name: typescript-action
+description: Template of TypeScript Action
+
+inputs:
+  name:
+    description: example input
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

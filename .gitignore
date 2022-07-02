@@ -95,13 +95,7 @@ typings/
 Thumbs.db
 
 # Ignore built ts files
-__tests__/runner/*
-lib/**/*
+lib/
 
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
+# Only release tag contains dist directory
+

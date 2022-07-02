@@ -1,105 +1,103 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# typescript-action [![ts](https://github.com/int128/typescript-action/actions/workflows/ts.yaml/badge.svg)](https://github.com/int128/typescript-action/actions/workflows/ts.yaml)
 
-# Create a JavaScript Action using TypeScript
+This is a template of TypeScript action.
+Inspired from https://github.com/actions/typescript-action.
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
+## Features
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+- Ready to develop with the minimum configs
+  - Yarn
+  - Prettier
+  - ESLint
+  - tsconfig
+  - Jest
+- Automated continuous release
+- Keep consistency of generated files
+- Shipped with Renovate config
 
-## Create an action from this template
 
-Click the `Use this Template` and provide the new repo details for your action
+## Getting Started
 
-## Code in Main
+Click `Use this template` to create a repository.
 
-> First, you'll need to have a reasonably modern version of `node` handy. This won't work with versions older than 9, for instance.
+An initial release `v0.0.0` is automatically created by GitHub Actions.
+You can see the generated files in `dist` directory on the tag.
 
-Install the dependencies  
-```bash
-$ npm install
+Then checkout your repository and test it. Node.js is required.
+
+```console
+$ git clone https://github.com/your/repo.git
+
+$ yarn
+$ yarn test
 ```
 
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
+Create a pull request for a change.
+
+```console
+$ git checkout -b feature
+$ git commit -m 'Add feature'
+$ gh pr create -fd
 ```
 
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
+Once you merge a pull request, a new minor release (such as `v0.1.0`) is created.
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
 
-...
-```
+### Stable release
 
-## Change action.yml
-
-The action.yml defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml))
+When you want to create a stable release, change the major version in [release workflow](.github/workflows/release.yaml).
 
 ```yaml
-uses: ./
-with:
-  milliseconds: 1000
+      - uses: int128/release-typescript-action@v1
+        with:
+          major-version: 1
 ```
 
-See the [actions tab](https://github.com/actions/typescript-action/actions) for runs of this action! :rocket:
+Then a new stable release `v1.0.0` is created.
 
-## Usage:
 
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
+## Specification
+
+To run this action, create a workflow as follows:
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: int128/typescript-action@v1
+        with:
+          name: hello
+```
+
+### Inputs
+
+| Name | Default | Description
+|------|----------|------------
+| `name` | (required) | example input
+
+
+### Outputs
+
+| Name | Description
+|------|------------
+| `example` | example output
+
+
+## Development
+
+### Release workflow
+
+When a pull request is merged into main branch, a new minor release is created by GitHub Actions.
+See https://github.com/int128/release-typescript-action for details.
+
+### Keep consistency of generated files
+
+If a pull request needs to be fixed by Prettier, an additional commit to fix it will be added by GitHub Actions.
+See https://github.com/int128/update-generated-files-action for details.
+
+### Dependency update
+
+You can enable Renovate to update the dependencies.
+This repository is shipped with the config https://github.com/int128/typescript-action-renovate-config.
