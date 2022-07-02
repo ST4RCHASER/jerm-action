@@ -38,7 +38,7 @@ export const run = async (input: Inputs): Promise<void> => {
       }
     }));
     core.info(`Results: ${JSON.stringify(lists)}`);
-  } catch (err: any) {
+  } catch (err: unknown) {
     core.error(`sumting wrong with something: ${err}`)
   }
 }
