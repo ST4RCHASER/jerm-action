@@ -12,7 +12,6 @@ type Inputs = {
 // eslint-disable-next-line @typescript-eslint/require-await
 export const run = async (input: Inputs): Promise<void> => {
   try {
-    await exec('sudo apt-get install -y libvips')
     const filePath = path.resolve(input.path)
     const files = await walk({
       path: filePath,

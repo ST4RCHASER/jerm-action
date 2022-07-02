@@ -19,11 +19,10 @@ jobs:
         with:
           node-version: 16
           cache: yarn
-      - run: sudo apt-get install -y libvips
       - run: yarn
       - run: yarn build
       - run: yarn package
       - uses: int128/release-typescript-action@v1
         with:
           # TODO: change this on the stable release
-          major-version: 3
+          major-version: 4
