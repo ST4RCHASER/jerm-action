@@ -33,9 +33,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(186));
 const run_1 = __nccwpck_require__(995);
 const main = async () => {
-    await (0, run_1.run)({
-        name: core.getInput('name', { required: true }),
-    });
+    await (0, run_1.run)({ path: core.getInput('path') });
 };
 main().catch((e) => core.setFailed(e instanceof Error ? e.message : JSON.stringify(e)));
 
@@ -73,9 +71,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = void 0;
 const core = __importStar(__nccwpck_require__(186));
+const fs_1 = __nccwpck_require__(147);
 // eslint-disable-next-line @typescript-eslint/require-await
-const run = async (inputs) => {
-    core.info(`my name is ${inputs.name}`);
+const run = async (input) => {
+    try {
+        const files = await fs_1.promises.readdir('./');
+        core.info(`Files: ${JSON.stringify(files)}`);
+        // core.setOutput('files', files.join(', '))
+    }
+    catch (err) {
+        console.error(err);
+    }
 };
 exports.run = run;
 
