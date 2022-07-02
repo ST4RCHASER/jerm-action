@@ -4,7 +4,7 @@ import walk from 'ignore-walk'
 import path from 'path'
 import { writeText } from './jerm/ascii'
 import { compositeYan } from './jerm/image'
-import {exec} from 'child_process'
+import { exec } from 'child_process'
 type Inputs = {
   path: string
 }
