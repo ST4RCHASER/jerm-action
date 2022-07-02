@@ -63,6 +63,7 @@ jobs:
             maintainers
           milestone: 1
           draft: false
+          base: ${{ github.head_ref }}
 
   generate:
     runs-on: ubuntu-latest
