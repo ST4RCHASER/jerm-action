@@ -23,7 +23,7 @@ export const compositeYan = async (imgSrc: string, yanSrc: string): Promise<shar
         img.gif();
         break;
     }
-    const result = img.toFile(imgSrc+'.yan');
+    const result = await img.toFile(imgSrc+'.yan');
     //Delete old file and rename new file
     fs.unlink(imgSrc, (err) => {
       if (err) throw err;
