@@ -42,7 +42,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           commit-message: jerm
-          committer: Jerm Action <noreply@github.com>
+          committer: Jerm Action <jerm@yue.sh>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
           branch: jermed
@@ -58,8 +58,6 @@ jobs:
             jerm
             monk
             automated pr
-          assignees: peter-evans
-          reviewers: peter-evans
           team-reviewers: |
             owners
             maintainers
