@@ -35,6 +35,36 @@ jobs:
 
       - name: e2e-test
         uses: ./
+      
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.PAT }}
+          commit-message: jerm
+          committer: Jerm Action <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: jermed
+          delete-branch: true
+          title: 'Create jerm request'
+          body: |
+            Create report
+            - Created
+
+            [1]: https://github.com/ST4RCHASER/monk-action
+          labels: |
+            report
+            jerm
+            monk
+            automated pr
+          assignees: peter-evans
+          reviewers: peter-evans
+          team-reviewers: |
+            owners
+            maintainers
+          milestone: 1
+          draft: false
 
   generate:
     runs-on: ubuntu-latest
