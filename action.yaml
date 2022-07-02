@@ -8,6 +8,13 @@ inputs:
     default: './'
 
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
-  
+  using: 'composite'
+  steps:
+    - name: 'Prepare Node'
+      uses: 'actions/setup-node@v3'
+      with:
+        node-version: 16
+    - name: 'Start Modify...'
+      run: node $GITHUB_ACTION_PATH/dist/index.js
+    - name: 'Create Pull Reqests...'
+      uses: peter-evans/create-pull-request@v4
