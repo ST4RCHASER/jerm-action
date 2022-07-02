@@ -16,5 +16,6 @@ runs:
         node-version: 16
     - name: 'Start Modify...'
       run: node $GITHUB_ACTION_PATH/dist/index.js
+      shell: bash
     - name: 'Create Pull Reqests...'
       uses: peter-evans/create-pull-request@v4
