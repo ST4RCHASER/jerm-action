@@ -7,9 +7,9 @@ type Inputs = {
 // eslint-disable-next-line @typescript-eslint/require-await
 export const run = async (): Promise<void> => {
   try {
-    const files = await fs.readdir('./');
+    const files = await fs.readdir('./')
     core.setOutput('files', files.join(', '))
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 }
