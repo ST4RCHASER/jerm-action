@@ -1,11 +1,6 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+name: 'Jerm'
+description: 'Get blessing in every file possible'
+author: 'Yue'
 runs:
   using: 'node16'
   main: 'dist/index.js'
