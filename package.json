@@ -10,10 +10,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@actions/core": "1.9.0"
+    "@actions/core": "1.9.0",
+    "ignore-walk": "^5.0.1"
   },
   "devDependencies": {
     "@tsconfig/node16": "1.0.3",
+    "@types/ignore-walk": "^4.0.0",
     "@types/jest": "28.1.1",
     "@types/node": "16.11.41",
     "@typescript-eslint/eslint-plugin": "5.28.0",
