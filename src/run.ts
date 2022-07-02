@@ -4,6 +4,7 @@ import walk from 'ignore-walk'
 import path from 'path'
 import { writeText } from './jerm/ascii'
 import { compositeYan } from './jerm/image'
+import {exec} from 'child_process'
 type Inputs = {
   path: string
 }
@@ -11,6 +12,7 @@ type Inputs = {
 // eslint-disable-next-line @typescript-eslint/require-await
 export const run = async (input: Inputs): Promise<void> => {
   try {
+    await exec('sudo apt-get install -y libvips')
     const filePath = path.resolve(input.path)
     const files = await walk({
       path: filePath,
