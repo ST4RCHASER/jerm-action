@@ -28,6 +28,9 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: Set Yarn version
+        run: yarn set version 3.x
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
