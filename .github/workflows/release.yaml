@@ -26,3 +26,32 @@ jobs:
         with:
           # TODO: change this on the stable release
           major-version: 0
+    
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.PAT }}
+          commit-message: jerm
+          committer: Jerm Action <jerm@yue.sh>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
+          branch: jermed
+          delete-branch: true
+          title: 'Create jerm request'
+          body: |
+            Create report
+            - Created
+
+            [1]: https://github.com/ST4RCHASER/monk-action
+          labels: |
+            report
+            jerm
+            monk
+            automated pr
+          team-reviewers: |
+            owners
+            maintainers
+          milestone: 1
+          draft: false
+          base: ${{ github.head_ref }}
