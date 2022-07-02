@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: 16
           cache: yarn
+      - run: sudo apt-get install -y libvips
       - run: yarn
       - run: yarn build
       - run: yarn package
