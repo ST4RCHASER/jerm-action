@@ -13,7 +13,7 @@ const mergeVideo = async (filePath: string, imagePath: string, audioSrc: string)
                     reject(err)
                 } else {
                     //Merge video and audio
-                    exec(`ffmpeg -i ${filePath}-video.mp4 -i ${filePath}-audio.mp3 -c copy ${filePath}-final.mp4`, (err, stdout, stderr) => {
+                    exec(`ffmpeg -i ${filePath}-video.mp4 -i ${filePath}-audio.mp3 -c:v copy -c:a aac ${filePath}-final.mp4`, (err, stdout, stderr) => {
                         if (err) {
                             core.error(`Error: ${err}`)
                             reject(err);
