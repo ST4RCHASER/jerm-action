@@ -8,7 +8,7 @@ interface AssetLocation {
     audio: string;
 }
 const defaultAssetURL = {
-    assci: 'hhttps://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/ascii.txt',
+    assci: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/ascii.txt',
     image: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/image.jpg',
     audio: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/audio.mp3',
 }
