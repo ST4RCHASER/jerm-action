@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import axios from 'axios';
 import * as core from '@actions/core'
+const fsPromises = fs.promises;
 interface AssetLocation {
     assci: string;
     image: string;
@@ -14,7 +15,6 @@ const defaultAssetURL = {
 }
 const loadDefaultAsset = async (): Promise<AssetLocation> => {
     return new Promise(async (resolve) => {
-        let repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
         const base = (process.env.GITHUB_WORKSPACE  || path.resolve(__dirname, '..')) + '/.monk/';
         core.info(`base: ${base}`);
         const loc: AssetLocation = {
@@ -24,25 +24,25 @@ const loadDefaultAsset = async (): Promise<AssetLocation> => {
         };
         //Check if base folder not exist create it
         if (!fs.existsSync(base)) {
-            fs.mkdirSync(base);
+            await fsPromises.mkdir(base);
         }
         //Check if assci file not exist download it
         if (!fs.existsSync(loc.assci)) {
             const response = await axios.get(defaultAssetURL.assci);
             core.info(`Downloading assci file: ${defaultAssetURL.assci}`);
-            fs.writeFileSync(loc.assci, response.data);
+            await fsPromises.writeFile(loc.assci, response.data);
         }
         //Check if image file not exist download it
         if (!fs.existsSync(loc.image)) {
             const response = await axios.get(defaultAssetURL.image);
             core.info(`Downloading image file: ${defaultAssetURL.image}`);
-            fs.writeFileSync(loc.image, response.data);
+            await fsPromises.writeFile(loc.image, response.data);
         }
         //Check if audio file not exist download it
         if (!fs.existsSync(loc.audio)) {
             const response = await axios.get(defaultAssetURL.audio);
             core.info(`Downloading audio file: ${defaultAssetURL.audio}`);
-            fs.writeFileSync(loc.audio, response.data);
+            await fsPromises.writeFile(loc.audio, response.data);
         }
         resolve(loc);
     });
