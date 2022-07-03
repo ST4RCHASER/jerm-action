@@ -25,7 +25,7 @@ runs:
       shell: bash
     - name: Extract branch name
       shell: bash
-      run: echo "##[set-output name=branch;]$(git describe --always --git-dir=${GITHUB_REF#refs/heads/})"
+      run: echo "##[set-output name=branch;]$(git describe --always)"
       id: extract_branch
     - name: 'Create Pull Reqests...'
       uses: peter-evans/create-pull-request@v4
