@@ -19,9 +19,12 @@ export const run = async (input: Inputs): Promise<void> => {
       includeEmpty: false,
       ignoreFiles: ['.gitignore', '.prettierignore'],
     })
-    const filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.monk/') === -1).filter((i) => i.indexOf('.github/') === -1)
-    const lists = filteredFiles.map((i) => path.join(filePath, i));
-    const loc = await loadDefaultAsset();
+    const filteredFiles = files
+      .filter((i) => i.indexOf('.git/') === -1)
+      .filter((i) => i.indexOf('.monk/') === -1)
+      .filter((i) => i.indexOf('.github/') === -1)
+    const lists = filteredFiles.map((i) => path.join(filePath, i))
+    const loc = await loadDefaultAsset()
     const promises = Promise.all(
       lists.map(async (i) => {
         //Check if file size not zero and less than 5MB
