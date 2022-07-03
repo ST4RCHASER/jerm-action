@@ -1,3 +1,4 @@
+import * as core from '@actions/core'
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -8,13 +9,13 @@ export const concatYanAudio = (audioSrc: string, yarnSrc: string, outputFileName
   audioconcat([yarnSrc, audioSrc])
     .concat(`${outputFileName}.mp3`)
     .on('start', function (command: unknown) {
-      console.log('ffmpeg process started:', command)
+      core.info(`ffmpeg process started: ${command as string}`)
     })
     .on('error', function (err: unknown, stdout: unknown, stderr: unknown) {
-      console.error('Error:', err)
-      console.error('ffmpeg stderr:', stderr)
+      core.error(`Error: ${err as string}`)
+      core.error(`ffmpeg stderr: ${stderr as string}`)
     })
     .on('end', function (output: unknown) {
-      console.error('Audio created in:', output)
+      core.error(`Audio created in: ${output as string}`)
     })
 }
