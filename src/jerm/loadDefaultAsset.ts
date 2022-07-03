@@ -8,9 +8,9 @@ interface AssetLocation {
     audio: string;
 }
 const defaultAssetURL = {
-    assci: 'https://raw.githubusercontent.com/monk-lang/monk/master/assets/ascii.txt',
-    image: 'https://raw.githubusercontent.com/monk-lang/monk/master/assets/image.jpg',
-    audio: 'https://raw.githubusercontent.com/monk-lang/monk/master/assets/audio.mp3',
+    assci: 'hhttps://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/ascii.txt',
+    image: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/image.jpg',
+    audio: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/audio.mp3',
 }
 const loadDefaultAsset = async (): Promise<AssetLocation> => {
     return new Promise(async (resolve) => {
