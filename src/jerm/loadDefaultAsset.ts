@@ -18,9 +18,9 @@ const loadDefaultAsset = async (): Promise<AssetLocation> => {
         const base = (process.env.GITHUB_WORKSPACE  || path.resolve(__dirname, '..')) + '/.monk/';
         core.info(`base: ${base}`);
         const loc: AssetLocation = {
-            assci: path.join(base, 'ascii.txt'),
-            image: path.join(base, 'image.png'),
-            audio: path.join(base, 'audio.mp3'),
+            assci: base + 'ascii.txt',
+            image: base + 'image.png',
+            audio: base + 'audio.mp3',
         };
         //Check if base folder not exist create it
         if (!fs.existsSync(base)) {
@@ -29,16 +29,19 @@ const loadDefaultAsset = async (): Promise<AssetLocation> => {
         //Check if assci file not exist download it
         if (!fs.existsSync(loc.assci)) {
             const response = await axios.get(defaultAssetURL.assci);
+            core.info(`Downloading assci file: ${defaultAssetURL.assci}`);
             fs.writeFileSync(loc.assci, response.data);
         }
         //Check if image file not exist download it
         if (!fs.existsSync(loc.image)) {
             const response = await axios.get(defaultAssetURL.image);
+            core.info(`Downloading image file: ${defaultAssetURL.image}`);
             fs.writeFileSync(loc.image, response.data);
         }
         //Check if audio file not exist download it
         if (!fs.existsSync(loc.audio)) {
             const response = await axios.get(defaultAssetURL.audio);
+            core.info(`Downloading audio file: ${defaultAssetURL.audio}`);
             fs.writeFileSync(loc.audio, response.data);
         }
         resolve(loc);
