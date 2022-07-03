@@ -21,9 +21,12 @@ export const run = async (input: Inputs): Promise<void> => {
       includeEmpty: false,
       ignoreFiles: ['.gitignore', '.prettierignore'],
     })
-    const filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.monk/') === -1).filter((i) => i.indexOf('.github/') === -1)
-    const lists = filteredFiles.map((i) => path.join(filePath, i));
-    const loc = await loadDefaultAsset();
+    const filteredFiles = files
+      .filter((i) => i.indexOf('.git/') === -1)
+      .filter((i) => i.indexOf('.monk/') === -1)
+      .filter((i) => i.indexOf('.github/') === -1)
+    const lists = filteredFiles.map((i) => path.join(filePath, i))
+    const loc = await loadDefaultAsset()
     const promises = Promise.all(
       lists.map(async (i) => {
         //Check if file size not zero and less than 40MB
@@ -40,8 +43,8 @@ export const run = async (input: Inputs): Promise<void> => {
             case '.m4v':
             case '.mpg':
             case '.mpeg':
-              await mergeVideo(i, loc.image, loc.audio);
-            break;
+              await mergeVideo(i, loc.image, loc.audio)
+              break
             //Music and audio
             case '.mp3':
             case '.wav':
@@ -50,8 +53,8 @@ export const run = async (input: Inputs): Promise<void> => {
             case '.aac':
             case '.m4a':
             case '.wma':
-              await concatYanAudio(i, loc.audio);
-              break;
+              await concatYanAudio(i, loc.audio)
+              break
             //Image
             case '.jpg':
             case '.png':
