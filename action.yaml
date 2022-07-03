@@ -30,6 +30,8 @@ runs:
     - name: 'Create Pull Reqests...'
       uses: peter-evans/create-pull-request@v4
       with: 
+        title: "[Jerm] Get Blessed."
         branch: jerm/${{ steps.extract_branch.outputs.branch }}
+        commit-message: "feat(blessing): 🙏 🙇 blessed"
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
