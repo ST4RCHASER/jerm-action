@@ -4,18 +4,33 @@ import * as core from '@actions/core'
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const audioconcat = require('audioconcat')
-
-export const concatYanAudio = (audioSrc: string, yarnSrc: string, outputFileName = 'yun') => {
-  audioconcat([yarnSrc, audioSrc])
-    .concat(`${outputFileName}.mp3`)
-    .on('start', function (command: unknown) {
-      core.info(`ffmpeg process started: ${command as string}`)
-    })
-    .on('error', function (err: unknown, stdout: unknown, stderr: unknown) {
-      core.error(`Error: ${err as string}`)
-      core.error(`ffmpeg stderr: ${stderr as string}`)
-    })
-    .on('end', function (output: unknown) {
-      core.error(`Audio created in: ${output as string}`)
-    })
+import fs from 'fs';
+import { exec } from 'child_process';
+export const concatYanAudio = (audioSrc: string, yarnSrc: string) => {
+  return new Promise<void>((resolve, reject) => {
+    //Run ffmpeg command
+    exec(`ffmpeg -i ${audioSrc} -i {${yarnSrc}} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" ${audioSrc}-yan.mp3`, (err, stdout, stderr) => {
+      if (err) {
+        core.error(`Error: ${err}`)
+        reject(err)
+      } else {
+        core.info(`stdout: ${stdout}`)
+        //delete old and rename new file
+        fs.unlink(audioSrc, (err) => {
+          if (err) {
+            core.error(`Error: ${err}`)
+            reject(err)
+          } else {
+            fs.rename(`${audioSrc}-yan.mp3`, audioSrc, (err) => {
+              if (err) {
+                core.error(`Error: ${err}`)
+                reject(err)
+              }
+              resolve();
+            })
+          }
+        });
+      }
+    });
+  });
 }

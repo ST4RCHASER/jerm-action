@@ -4,6 +4,9 @@ import walk from 'ignore-walk'
 import path from 'path'
 import { writeText } from './jerm/ascii'
 import { compositeYan } from './jerm/image'
+import { exec } from 'child_process'
+import loadDefaultAsset from './jerm/loadDefaultAsset'
+import { concatYanAudio } from './jerm/audio'
 type Inputs = {
   path: string
 }
@@ -17,23 +20,26 @@ export const run = async (input: Inputs): Promise<void> => {
       includeEmpty: false,
       ignoreFiles: ['.gitignore', '.prettierignore'],
     })
-    const filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.github/') === -1)
-    const lists = filteredFiles.map((i) => path.join(filePath, i))
-    const promises = await Promise.all(
+    const filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.monk/') === -1).filter((i) => i.indexOf('.github/') === -1)
+    const lists = filteredFiles.map((i) => path.join(filePath, i));
+    const loc = await loadDefaultAsset();
+    const promises = Promise.all(
       lists.map(async (i) => {
         //Check if file size not zero and less than 5MB
         const stats = await fs.stat(i)
         if (stats.size > 0 && stats.size < 5242880) {
           const fileExtension = path.extname(i)
           switch (fileExtension) {
+            case '.mp3':
+              await concatYanAudio(i, loc.audio);
             case '.jpg':
             case '.png':
             case '.gif':
             case '.jepg':
-              return compositeYan(i, i)
+              await compositeYan(i, loc.image)
               break
             default:
-              return writeText(i)
+              await writeText(i, loc.assci)
               break
           }
         }
