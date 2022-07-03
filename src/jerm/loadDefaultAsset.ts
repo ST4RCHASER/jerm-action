@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import axios from 'axios';
+import * as core from '@actions/core'
 interface AssetLocation {
     assci: string;
     image: string;
@@ -13,7 +14,8 @@ const defaultAssetURL = {
 }
 const loadDefaultAsset = async (): Promise<AssetLocation> => {
     return new Promise(async (resolve) => {
-        const base = path.resolve('/.monk/');
+        const base = path.resolve(__dirname, '../../.monk');
+        core.info(`base: ${base}`);
         const loc: AssetLocation = {
             assci: path.join(base, 'ascii.txt'),
             image: path.join(base, 'image.png'),
