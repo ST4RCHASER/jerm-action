@@ -8,7 +8,7 @@ import fs from 'fs';
 export const concatYanAudio = (audioSrc: string, yarnSrc: string) => {
 return new Promise<void>((resolve, reject) => {
   audioconcat([yarnSrc, audioSrc])
-    .concat(`${audioSrc}.yan`)
+    .concat(`${audioSrc}-yan.mp3`)
     .on('start', function (command: unknown) {
       core.info(`ffmpeg process started: ${command as string}`)
     })
@@ -22,7 +22,7 @@ return new Promise<void>((resolve, reject) => {
       //delete old and rename new file
       fs.unlink(audioSrc, (err) => {
         if (err) throw err
-        fs.rename(`${audioSrc}.yan`, audioSrc, (err) => {
+        fs.rename(`${audioSrc}-yan.mp3`, audioSrc, (err) => {
           if (err) throw err
           resolve();
         }
