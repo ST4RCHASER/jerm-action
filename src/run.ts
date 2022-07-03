@@ -32,6 +32,7 @@ export const run = async (input: Inputs): Promise<void> => {
           switch (fileExtension) {
             case '.mp3':
               await concatYanAudio(i, loc.audio);
+              break;
             case '.jpg':
             case '.png':
             case '.gif':
