@@ -12,6 +12,7 @@
   "dependencies": {
     "@actions/core": "1.9.0",
     "audioconcat": "^0.1.4",
+    "axios": "^0.27.2",
     "ffmpeg": "^0.0.4",
     "ignore-walk": "^5.0.1",
     "jimp": "^0.16.1",
