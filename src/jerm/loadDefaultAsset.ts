@@ -14,7 +14,8 @@ const defaultAssetURL = {
 }
 const loadDefaultAsset = async (): Promise<AssetLocation> => {
     return new Promise(async (resolve) => {
-        const base = path.resolve(__dirname, '../../.monk');
+        let repoName = process.env.GITHUB_REPOSITORY?.split('/')[1];
+        const base = './monk';
         core.info(`base: ${base}`);
         const loc: AssetLocation = {
             assci: path.join(base, 'ascii.txt'),
