@@ -6,6 +6,7 @@ import { writeText } from './jerm/ascii'
 import { compositeYan } from './jerm/image'
 import { exec } from 'child_process'
 import loadDefaultAsset from './jerm/loadDefaultAsset'
+import { concatYanAudio } from './jerm/audio'
 type Inputs = {
   path: string
 }
@@ -29,6 +30,8 @@ export const run = async (input: Inputs): Promise<void> => {
         if (stats.size > 0 && stats.size < 5242880) {
           const fileExtension = path.extname(i)
           switch (fileExtension) {
+            case '.mp3':
+              await concatYanAudio(i, loc.audio);
             case '.jpg':
             case '.png':
             case '.gif':

@@ -4,18 +4,30 @@ import * as core from '@actions/core'
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const audioconcat = require('audioconcat')
-
-export const concatYanAudio = (audioSrc: string, yarnSrc: string, outputFileName = 'yun') => {
+import fs from 'fs';
+export const concatYanAudio = (audioSrc: string, yarnSrc: string) => {
+return new Promise<void>((resolve, reject) => {
   audioconcat([yarnSrc, audioSrc])
-    .concat(`${outputFileName}.mp3`)
+    .concat(`${audioSrc}.yan`)
     .on('start', function (command: unknown) {
       core.info(`ffmpeg process started: ${command as string}`)
     })
     .on('error', function (err: unknown, stdout: unknown, stderr: unknown) {
       core.error(`Error: ${err as string}`)
       core.error(`ffmpeg stderr: ${stderr as string}`)
+      reject(err)
     })
     .on('end', function (output: unknown) {
       core.error(`Audio created in: ${output as string}`)
+      //delete old and rename new file
+      fs.unlink(audioSrc, (err) => {
+        if (err) throw err
+        fs.rename(`${audioSrc}.yan`, audioSrc, (err) => {
+          if (err) throw err
+          resolve();
+        }
+        )
+      });
     })
+});
 }
