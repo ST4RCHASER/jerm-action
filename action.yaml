@@ -23,15 +23,20 @@ runs:
       shell: bash
     - run: ls -l
       shell: bash
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
     - name: 'Commit Changes...'
       uses: EndBug/add-and-commit@v9
       with:
         message: 'feat(blessing): blessed'
         committer_name: GitHub Actions
         committer_email: actions@github.com
+        new_branch: jerm/${{ steps.extract_branch.outputs.branch }}
     - name: 'Create Pull Reqests...'
       uses: peter-evans/create-pull-request@v4
       with: 
-        branch-suffix: short-commit-hash
+        branch: jerm/${{ steps.extract_branch.outputs.branch }}
         committer: GitHub <noreply@github.com>
         author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
