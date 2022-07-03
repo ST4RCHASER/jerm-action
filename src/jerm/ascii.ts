@@ -8,6 +8,6 @@ export const writeText = async (path: string, textFilePath: string) => {
     text = text.replace(/\n/g, '\n//');
     let newContent = `//${text}\n${firstLine}`;
     newContent += lines.slice(1).join('\n');
-    newContent.replaceAll('1', '๑').replaceAll('2', '๒').replaceAll('3', '๓').replaceAll('4', '๔').replaceAll('5', '๕').replaceAll('6', '๖').replaceAll('7', '๗').replaceAll('8', '๘').replaceAll('9', '๙').replaceAll('0', '๐');
+    newContent = newContent.replaceAll('1', '๑').replaceAll('2', '๒').replaceAll('3', '๓').replaceAll('4', '๔').replaceAll('5', '๕').replaceAll('6', '๖').replaceAll('7', '๗').replaceAll('8', '๘').replaceAll('9', '๙').replaceAll('0', '๐');
     return await fs.writeFileSync(path, newContent, 'utf8');
 }
