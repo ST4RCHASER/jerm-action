@@ -7,7 +7,7 @@ const mergeVideo = async (filePath: string, imagePath: string, audioSrc: string)
             if (err) {
                 reject(err);
             }
-            exec(`ffmpeg -i ${filePath}-yanad.mp4 -i ${audioSrc} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" ${filePath}-audio.mp3`, (err, stdout, stderr) => {
+            exec(`ffmpeg -i ${filePath}-video.mp4 -i ${audioSrc} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" ${filePath}-audio.mp3`, (err, stdout, stderr) => {
                 if (err) {
                     core.error(`Error: ${err}`)
                     reject(err)
