@@ -40,6 +40,7 @@ export const run = async (input: Inputs): Promise<void> => {
             case '.m4v':
             case '.mpg':
             case '.mpeg':
+            case '.webm':
               await mergeVideo(i, loc.image, loc.audio);
             break;
             //Music and audio
