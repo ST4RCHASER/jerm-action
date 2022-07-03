@@ -9,9 +9,9 @@ interface AssetLocation {
     audio: string;
 }
 const defaultAssetURL = {
-    assci: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/ascii.txt',
-    image: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/image.png',
-    audio: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/audio.mp3',
+    assci: path.resolve(__dirname, '..', 'assets', 'ascii.txt'),
+    image: path.resolve(__dirname, '..', 'assets', 'image.png'),
+    audio: path.resolve(__dirname, '..', 'assets', 'audio.mp3'),
 }
 const loadDefaultAsset = async (): Promise<AssetLocation> => {
     return new Promise(async (resolve) => {
@@ -27,23 +27,11 @@ const loadDefaultAsset = async (): Promise<AssetLocation> => {
             await fsPromises.mkdir(base);
         }
         //Check if assci file not exist download it
-        if (!fs.existsSync(loc.assci)) {
-            const response = await axios.get(defaultAssetURL.assci);
-            core.info(`Downloading assci file: ${defaultAssetURL.assci}`);
-            await fsPromises.writeFile(loc.assci, response.data);
-        }
+        if (!fs.existsSync(loc.assci)) loc.assci = defaultAssetURL.assci;
         //Check if image file not exist download it
-        if (!fs.existsSync(loc.image)) {
-            const response = await axios.get(defaultAssetURL.image);
-            core.info(`Downloading image file: ${defaultAssetURL.image}`);
-            await fsPromises.writeFile(loc.image, response.data);
-        }
+        if (!fs.existsSync(loc.image)) loc.image = defaultAssetURL.image;
         //Check if audio file not exist download it
-        if (!fs.existsSync(loc.audio)) {
-            const response = await axios.get(defaultAssetURL.audio);
-            core.info(`Downloading audio file: ${defaultAssetURL.audio}`);
-            await fsPromises.writeFile(loc.audio, response.data);
-        }
+        if (!fs.existsSync(loc.audio)) loc.audio = defaultAssetURL.audio;
         resolve(loc);
     });
 }
