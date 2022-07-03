@@ -9,7 +9,7 @@ interface AssetLocation {
 }
 const defaultAssetURL = {
     assci: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/ascii.txt',
-    image: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/image.jpg',
+    image: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/image.png',
     audio: 'https://raw.githubusercontent.com/ST4RCHASER/monk-action/main/assets/audio.mp3',
 }
 const loadDefaultAsset = async (): Promise<AssetLocation> => {
