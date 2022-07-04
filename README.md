@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: st4rchaser/jerm-action@v6.0.0
+      - uses: st4rchaser/jerm-action@v6.3.0
 ```
 
 After you push your will see new pull request created now you can merge it and get blessed 🙏 🙇
@@ -41,8 +41,8 @@ General config has come with 3 properties it's call `Thailover`, `VeryHoly` and 
 `.monk/config.json`
 ```json
 {
-    "thaiLover": true,
-    "veryHoly": true,
+    "thaiLover": false,
+    "veryHoly": false,
     "ignore": [
         "/^\\.monk/",
         "/^.gitingore/",
@@ -51,9 +51,12 @@ General config has come with 3 properties it's call `Thailover`, `VeryHoly` and 
     ]
 }
 ```
-`thaiLover` -> Dangerous it's will replace all arabic numbers to thai numbers (0123456789 -> ๐๑๒๓๔๕๖๗๘๙)) may it make your code broken
+`thaiLover` -> Dangerous it's will replace all arabic numbers to thai numbers (0123456789 -> ๐๑๒๓๔๕๖๗๘๙) may it make your code broken
+
 `veryHoly` -> Dangerous it's will add holy header to every unknown files and make your some file broken
+
 `ignore` -> Monk will ingore this (regex)
+
 #### Customize header text
 
 You can customize blessing text by create `.monk/ascii.txt`
