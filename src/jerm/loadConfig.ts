@@ -17,7 +17,7 @@ const loadConfig = async () => {
     core.info('Start loading monk config...');
     const configFile = (process.env.GITHUB_WORKSPACE || path.resolve(__dirname, '..')) + '/.monk/config.js';
     if (fs.existsSync(configFile)) {
-        return await import(configFile) as JermConfig;
+        return await require(configFile) as JermConfig;
     }
     return defaultConfig;
 }
