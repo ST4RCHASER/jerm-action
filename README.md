@@ -34,19 +34,20 @@ General config has come with 3 properties it's call `Thailover`, `VeryHoly` and 
 ```javascript
 // .monk/config.js
 
-export default {
+const config = {
     //Dangerous it's will replace all arabic numbers to thai numbers (0123456789 -> ๐๑๒๓๔๕๖๗๘๙)) may it make your code broken
     thaiLover: true,
     //Dangerous it's will add holy header to every unknown files and make your some file broken
     veryHoly: true,
-    //Monk will ingore this (regex support)
+    //Monk will ingore this (regex)
     ignore: [
         /^\.monk/,
-        '.gitingore',
-        'readme.md',
-        '.prettierignore'
+        /^.gitingore/,
+        /^readme.md'/,
+        /^.prettierignore/
     ]
 }
+module.exports = config;
 ```
 
 #### Customize header text
