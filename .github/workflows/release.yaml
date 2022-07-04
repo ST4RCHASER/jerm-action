@@ -25,4 +25,4 @@ jobs:
       - uses: int128/release-typescript-action@v1
         with:
           # TODO: change this on the stable release
-          major-version: 5
+          major-version: 6
