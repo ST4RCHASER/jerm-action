@@ -18,7 +18,7 @@ export const run = async (input: Inputs): Promise<void> => {
       path: filePath,
       includeEmpty: false,
     })
-    const config: JermConfig = await loadConfig();
+    const config: JermConfig = loadConfig();
     const loc = await loadAsset();
     const filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.monk/') === -1).filter((i) => i.indexOf('.github/') === -1).filter((i) => config.ignore.every((j) => !j.test(i)));
     const lists = filteredFiles.map((i) => path.join(filePath, i));

@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import * as core from '@actions/core'
 import { JermConfig } from './interfaces/jermConfig.interface';
+import loadCustomConfig from './loadCustomConfig';
 const defaultConfig: JermConfig = {
     thaiLover: false,
     veryHoly: false,
@@ -12,12 +13,12 @@ const defaultConfig: JermConfig = {
         /^.prettierignore/
     ]
 }
-const loadConfig = async () => {
+const loadConfig = (): JermConfig => {
     //Try load config from .monk/config.js
     core.info('Start loading monk config...');
     const configFile = (process.env.GITHUB_WORKSPACE || path.resolve(__dirname, '..')) + '/.monk/config.js';
     if (fs.existsSync(configFile)) {
-        return await require(configFile) as JermConfig;
+        return loadCustomConfig as JermConfig;
     }
     return defaultConfig;
 }
