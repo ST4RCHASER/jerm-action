@@ -5,8 +5,9 @@ import { writeText } from './ascii';
 import { compositeYan } from './image';
 import { JermConfig } from './interfaces/jermConfig.interface';
 import { AssetLocation } from './interfaces/assetLocation.interface';
-const doJerm = async (fileLoc: string, assetLocation: AssetLocation, config: JermConfig): Promise<void> => {
-    const fileExtension = path.extname(fileLoc)
+const doJerm = async (fileLoc: string, assetLocation: AssetLocation, config: JermConfig, forceVeryHoly = false): Promise<void> => {
+    const fileExtension = path.extname(fileLoc);
+    if(forceVeryHoly) return writeText(fileLoc, assetLocation.assci, true);
     switch (fileExtension) {
         //Video
         case '.mp4':

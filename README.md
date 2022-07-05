@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: st4rchaser/jerm-action@v6.3.0
+      - uses: st4rchaser/jerm-action@v6.4.0
 ```
 
 After you push your will see new pull request created now you can merge it and get blessed 🙏 🙇
@@ -44,10 +44,10 @@ General config has come with 3 properties it's call `Thailover`, `VeryHoly` and 
     "thaiLover": false,
     "veryHoly": false,
     "ignore": [
-        "/^\\.monk/",
-        "/^.gitingore/",
-        "/^readme.md'/",
-        "/^.prettierignore/"
+        "^\\.monk",
+        "^.gitingore",
+        "^readme.md'",
+        "^.prettierignore"
     ]
 }
 ```
