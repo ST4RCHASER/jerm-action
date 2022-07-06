@@ -96,7 +96,7 @@ const concatYanAudio = (audioSrc, yarnSrc) => {
     return new Promise((resolve, reject) => {
         core.info(`Jerming audio: ${audioSrc}`);
         //Run ffmpeg command
-        (0, child_process_1.exec)(`ffmpeg -i ${audioSrc} -i ${yarnSrc} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" ${audioSrc}-yan.mp3`, (err, stdout) => {
+        (0, child_process_1.exec)(`ffmpeg -i "${audioSrc}" -i ${yarnSrc} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" "${audioSrc}-yan.mp3"`, (err, stdout) => {
             if (err)
                 reject(err);
             core.info(`stdout: ${stdout}`);
