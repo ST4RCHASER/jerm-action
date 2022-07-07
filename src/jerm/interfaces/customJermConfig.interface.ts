@@ -1,5 +1,5 @@
 export interface CustomJermConfig {
-    thaiLover: boolean;
-    veryHoly: boolean;
-    ignore: string[];
+  thaiLover: boolean
+  veryHoly: boolean
+  ignore: string[]
 }

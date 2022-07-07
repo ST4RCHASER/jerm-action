@@ -1,5 +1,5 @@
 export interface JermConfig {
-    thaiLover: boolean;
-    veryHoly: boolean;
-    ignore: RegExp[];
+  thaiLover: boolean
+  veryHoly: boolean
+  ignore: RegExp[]
 }
