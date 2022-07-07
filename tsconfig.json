@@ -2,6 +2,9 @@
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
     "outDir": "./lib",
-    "allowJs": true
+    "allowJs": true,
+    "lib": [
+      "ES2021.String"
+    ]
   }
 }

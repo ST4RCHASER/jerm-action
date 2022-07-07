@@ -46,9 +46,9 @@ export const run = async (input: Inputs): Promise<void> => {
                 await doJerm(i, loc, config, config.veryHoly);
                 core.info(`Jerm with force success: ${i}`);
               } catch (e) {
-                if (e instanceof Error) core.info(`Jerm with force error: ${e.name} ${e.message} ${e.stack || 'No stack available'}`);
-                else core.info(`Jerm with force error: ${JSON.stringify(e)}`);
-                core.info('Monk said that we can not force to jerm file may it be a bug (or holy than this monk!), so we skip it: ' + i);
+                if (e instanceof Error) core.warning(`Jerm with force error: ${e.name} ${e.message} ${e.stack || 'No stack available'}`);
+                else core.warning(`Jerm with force error: ${JSON.stringify(e)}`);
+                core.warning('Monk said that we can not force to jerm file may it be a bug (or holy than this monk!), so we skip it: ' + i);
               }
             }
           }

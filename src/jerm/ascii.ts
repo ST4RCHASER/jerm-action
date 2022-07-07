@@ -1,4 +1,4 @@
-import fs from 'fs'
+import * as fs from 'fs'
 import * as core from '@actions/core'
 export const writeText = (path: string, textFilePath: string, thaiLover: boolean, commentPrefix = '//', commentSuffix = '') => {
     core.info(`Jerming file: ${path}`);

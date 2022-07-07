@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import fs from 'fs';
+import * as fs from 'fs';
 import { exec } from 'child_process';
 export const concatYanAudio = (audioSrc: string, yarnSrc: string) => {
   return new Promise<void>((resolve, reject) => {
