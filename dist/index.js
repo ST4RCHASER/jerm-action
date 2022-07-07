@@ -29,27 +29,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.writeText = void 0;
-const fs_1 = __importDefault(__nccwpck_require__(7147));
+const fs = __importStar(__nccwpck_require__(7147));
 const core = __importStar(__nccwpck_require__(2186));
 const writeText = (path, textFilePath, thaiLover, commentPrefix = '//', commentSuffix = '') => {
     core.info(`Jerming file: ${path}`);
-    let text = fs_1.default.readFileSync(textFilePath, 'utf8');
-    const content = fs_1.default.readFileSync(path, 'utf8');
+    let text = fs.readFileSync(textFilePath, 'utf8');
+    const content = fs.readFileSync(path, 'utf8');
     const lines = content.split('\n');
     //Add comment prefix and suffix to text per line
-    text = text.split('\n').map(line => {
+    text = text
+        .split('\n')
+        .map((line) => {
         return commentPrefix + line + commentSuffix;
-    }).join('\n');
+    })
+        .join('\n');
     let newContent = `${commentPrefix}${text}${commentSuffix}\n`;
     newContent += lines.join('\n');
     if (thaiLover)
-        newContent = newContent.replaceAll('1', '๑').replaceAll('2', '๒').replaceAll('3', '๓').replaceAll('4', '๔').replaceAll('5', '๕').replaceAll('6', '๖').replaceAll('7', '๗').replaceAll('8', '๘').replaceAll('9', '๙').replaceAll('0', '๐');
-    return fs_1.default.writeFileSync(path, newContent, 'utf8');
+        newContent = newContent
+            .replaceAll('1', '๑')
+            .replaceAll('2', '๒')
+            .replaceAll('3', '๓')
+            .replaceAll('4', '๔')
+            .replaceAll('5', '๕')
+            .replaceAll('6', '๖')
+            .replaceAll('7', '๗')
+            .replaceAll('8', '๘')
+            .replaceAll('9', '๙')
+            .replaceAll('0', '๐');
+    return fs.writeFileSync(path, newContent, 'utf8');
 };
 exports.writeText = writeText;
 
@@ -84,27 +94,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.concatYanAudio = void 0;
 const core = __importStar(__nccwpck_require__(2186));
-const fs_1 = __importDefault(__nccwpck_require__(7147));
+const fs = __importStar(__nccwpck_require__(7147));
 const child_process_1 = __nccwpck_require__(2081);
 const concatYanAudio = (audioSrc, yarnSrc) => {
     return new Promise((resolve, reject) => {
         core.info(`Jerming audio: ${audioSrc}`);
         //Run ffmpeg command
-        (0, child_process_1.exec)(`ffmpeg -i "${audioSrc}" -i ${yarnSrc} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" "${audioSrc}-yan.mp3"`, (err, stdout) => {
+        (0, child_process_1.exec)(`ffmpeg -i "${audioSrc}" -i "${yarnSrc}" -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" "${audioSrc}-yan.mp3"`, (err, stdout) => {
             if (err)
                 reject(err);
             core.info(`stdout: ${stdout}`);
             //delete old and rename new file
-            fs_1.default.unlink(audioSrc, (err) => {
+            fs.unlink(audioSrc, (err) => {
                 if (err)
                     reject(err);
-                fs_1.default.rename(`${audioSrc}-yan.mp3`, audioSrc, (err) => {
+                fs.rename(`${audioSrc}-yan.mp3`, audioSrc, (err) => {
                     if (err)
                         reject(err);
                     resolve();
@@ -226,7 +233,7 @@ const doJerm = async (fileLoc, assetLocation, config, forceVeryHoly = false) => 
             break;
         case '.vb':
         case '.vbnet':
-            (0, ascii_1.writeText)(fileLoc, assetLocation.assci, config.thaiLover, '\'', '\'');
+            (0, ascii_1.writeText)(fileLoc, assetLocation.assci, config.thaiLover, "'", "'");
             break;
         default:
             if (config.veryHoly)
@@ -396,12 +403,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const defaultConfig = {
     thaiLover: false,
     veryHoly: false,
-    ignore: [
-        /^\.monk/,
-        /^.gitingore/,
-        /^readme.md'/,
-        /^.prettierignore/
-    ]
+    ignore: [/^\.monk/, /^.gitingore/, /^readme.md'/, /^.prettierignore/],
 };
 const loadConfig = () => {
     //Try load config from .monk/config.js
@@ -464,14 +466,14 @@ const mergeVideo = async (filePath, imagePath, audioSrc) => {
     core.info(`Jerming video: ${filePath}`);
     //Steps: add image to video and add audio to orgin video and merge final audio to video
     return new Promise((resolve, reject) => {
-        (0, child_process_1.exec)(`ffmpeg -i ${filePath} -i ${imagePath} -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -codec:a copy ${filePath}-video.mp4`, (err) => {
+        (0, child_process_1.exec)(`ffmpeg -i "${filePath}" -i "${imagePath}" -filter_complex "overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2" -codec:a copy "${filePath}-video.mp4"`, (err) => {
             if (err)
                 reject(err);
-            (0, child_process_1.exec)(`ffmpeg -i ${filePath}-video.mp4 -i ${audioSrc} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" ${filePath}-audio.mp3`, (err) => {
+            (0, child_process_1.exec)(`ffmpeg -i "${filePath}-video.mp4" -i ${audioSrc} -filter_complex "[0][1]amerge=inputs=2,pan=stereo|FL<c0+c1|FR<c2+c3[a]" -map "[a]" ${filePath}-audio.mp3`, (err) => {
                 if (err)
                     reject(err);
                 //Merge video and audio
-                (0, child_process_1.exec)(`ffmpeg -i ${filePath}-video.mp4 -i ${filePath}-audio.mp3 -map 0:v:0 -map 1:a:0 -y ${filePath}-final.mp4`, (err) => {
+                (0, child_process_1.exec)(`ffmpeg -i "${filePath}-video.mp4" -i "${filePath}-audio.mp3" -map 0:v:0 -map 1:a:0 -y ${filePath}-final.mp4`, (err) => {
                     if (err)
                         reject(err);
                     fs_1.default.unlink(filePath, (err) => {
@@ -589,7 +591,11 @@ const run = async (input) => {
         });
         const config = (0, loadConfig_1.default)();
         const loc = await (0, loadAsset_1.default)();
-        const filteredFiles = files.filter((i) => i.indexOf('.git/') === -1).filter((i) => i.indexOf('.monk/') === -1).filter((i) => i.indexOf('.github/') === -1).filter((i) => config.ignore.every((j) => !j.test(i)));
+        const filteredFiles = files
+            .filter((i) => i.indexOf('.git/') === -1)
+            .filter((i) => i.indexOf('.monk/') === -1)
+            .filter((i) => i.indexOf('.github/') === -1)
+            .filter((i) => config.ignore.every((j) => !j.test(i)));
         const lists = filteredFiles.map((i) => path_1.default.join(filePath, i));
         //Summoning monk by print it
         try {
@@ -601,7 +607,7 @@ const run = async (input) => {
                 core.info(`Failed to summon monk: ${e.name} ${e.message} ${e.stack || 'No stack available'}`);
             else
                 core.info(`Failed to summon monk: ${JSON.stringify(e)}`);
-            core.info('Don\'t worry about it, you can jerm it by yourself.');
+            core.info("Don't worry about it, you can jerm it by yourself.");
         }
         await Promise.all(lists.map(async (i) => {
             //Check if file size not zero and less than 40MB
@@ -625,10 +631,11 @@ const run = async (input) => {
                         }
                         catch (e) {
                             if (e instanceof Error)
-                                core.info(`Jerm with force error: ${e.name} ${e.message} ${e.stack || 'No stack available'}`);
+                                core.warning(`Jerm with force error: ${e.name} ${e.message} ${e.stack || 'No stack available'}`);
                             else
-                                core.info(`Jerm with force error: ${JSON.stringify(e)}`);
-                            core.info('Monk said that we can not force to jerm file may it be a bug (or holy than this monk!), so we skip it: ' + i);
+                                core.warning(`Jerm with force error: ${JSON.stringify(e)}`);
+                            core.warning('Monk said that we can not force to jerm file may it be a bug (or holy than this monk!), so we skip it: ' +
+                                i);
                         }
                     }
                 }
